@@ -2,8 +2,8 @@
     font-family: 'Major Mono Display', serif;
 }
 
-.footer-buttons {
-    font-size:0.6rem;
+.footer-buttons{
+    font-size: 1rem;
 }
 
 .footer {
@@ -12,6 +12,6 @@
 }
 
 .header {
-    text-align:center;
+    text-align:start;
     margin-top: 2rem;
 }
