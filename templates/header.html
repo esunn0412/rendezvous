@@ -11,11 +11,12 @@
             <span>login</span>
         </a>
         {% else %}
+             <a href="{% url 'accountapp:detail' pk=user.pk %}">    
+                 <span>MyPage</span>
+            </a>
             <form action="{% url 'accountapp:logout' %}?next={{ request.path }}" method="post">
                 {% csrf_token %}
-                <button type="submit" class="btn btn-dark rounded-pill col-1 mt-3">
-                    <span>logout</span>
-                </button>
+                <button type="submit">logout</button>
             </form>
 {#        <a href="{% url 'accountapp:logout' %}?next={{ request.path }}">#}
 {#            <span>logout</span>#}
