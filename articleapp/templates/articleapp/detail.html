@@ -3,12 +3,16 @@
 {% block content %}
 
     <div>
-        <div style="text-align:center; max-width: 500px; margin:4rem auto;">
+        <div style="text-align:center; max-width: 700px; margin:4rem auto;">
             {% if target_article.title %}
             <h1>{{ target_article.title }}</h1>
+            <h5>{{ target_article.writer.profile.nickname }}</h5>
             {% endif %}
 
-            <img src="{{ target_article.image.url }}" alt="article image">
+            <hr>
+
+            <img style="width:100%; border-radius:1rem; margin:2rem;"
+                    src="{{ target_article.image.url }}" alt="article image">
 
             {% if target_article.content %}
             <p>
@@ -16,18 +20,16 @@
             </p>
             {% endif %}
 
-            {% if target_article.writer == request.user %}
-                <a href="{% url 'articleapp:update' pk=target_article.pk%}">
-                    <p>
-                        Edit Article
-                    </p>
+            {% if target_article.writer == user %}
+                <a href="{% url 'articleapp:update' pk=target_article.pk%}" class="btn btn-primary rounded-pill col-3">
+                    Edit
                 </a>
-                <a href="{% url 'articleapp:delete' pk=target_article.pk%}">
-                    <p>
-                        Delete Article
-                    </p>
+                <a href="{% url 'articleapp:delete' pk=target_article.pk%}" class="btn btn-danger rounded-pill col-3">
+                    Delete
                 </a>
             {% endif %}
+
+            <hr>
         </div>
     </div>
 
