@@ -1,7 +1,5 @@
 
-
-
-app.name = 'profileapp'
+app_name = 'profileapp'
 
 urlpatterns = [
 
