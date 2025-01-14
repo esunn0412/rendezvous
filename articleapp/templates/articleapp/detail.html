@@ -1,0 +1,34 @@
+{% extends 'base.html' %}
+
+{% block content %}
+
+    <div>
+        <div style="text-align:center; max-width: 500px; margin:4rem auto;">
+            {% if target_article.title %}
+            <h1>{{ target_article.title }}</h1>
+            {% endif %}
+
+            <img src="{{ target_article.image.url }}" alt="article image">
+
+            {% if target_article.content %}
+            <p>
+                {{ target_article.content }}
+            </p>
+            {% endif %}
+
+            {% if target_article.writer == request.user %}
+                <a href="{% url 'articleapp:update' pk=target_article.pk%}">
+                    <p>
+                        Edit Article
+                    </p>
+                </a>
+                <a href="{% url 'articleapp:delete' pk=target_article.pk%}">
+                    <p>
+                        Delete Article
+                    </p>
+                </a>
+            {% endif %}
+        </div>
+    </div>
+
+{% endblock %}
