@@ -1,3 +1,10 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+
 .title {
     font-family: 'Major Mono Display', serif;
 }
@@ -14,4 +21,38 @@
 .header {
     text-align:center;
     margin-top: 2rem;
+}
+
+.nav-container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 1.5rem; /* Space between navigation items */
+}
+
+.nav-link.active {
+    font-weight: bold;
+    color: #007bff;
+}
+
+.nav-link {
+    text-decoration: none;
+    font-size: 1rem;
+    font-weight: 500;
+    border-radius: 5px;
+}
+
+.logout-btn {
+    background: none;
+    border: none;
+    font-size: 1rem;
+    border-radius: 5px;
+}
+
+
+
+@media screen and (max-width:500px){
+    html {
+        font-size: 13px;
+    }
 }

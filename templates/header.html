@@ -2,30 +2,28 @@
     <div>
         <h1 class="title">rendezvous</h1>
     </div>
-    <div>
-        <a href="{% url 'articleapp:list' %}">
+    <div class="nav-container">
+        <a href="{% url 'articleapp:list' %}" class="nav-link">
             <span>Articles</span>
         </a>
-        <span>nav2</span>
-        <span>nav3</span>
+        <span class="nav-item">nav2</span>
+        <span class="nav-item">nav3</span>
+
         {% if not user.is_authenticated %}
-        <a href="{% url 'accountapp:login' %}?next={{ request.path }}">
-            <span>login</span>
+        <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="nav-link">
+            <span>Login</span>
         </a>
-        <a href="{% url 'accountapp:create' %}">
+        <a href="{% url 'accountapp:create' %}" class="nav-link">
             <span>Signup</span>
         </a>
         {% else %}
-             <a href="{% url 'accountapp:detail' pk=user.pk %}">    
-                 <span>MyPage</span>
-            </a>
-            <form action="{% url 'accountapp:logout' %}?next={{ request.path }}" method="post">
-                {% csrf_token %}
-                <button type="submit">logout</button>
-            </form>
-{#        <a href="{% url 'accountapp:logout' %}?next={{ request.path }}">#}
-{#            <span>logout</span>#}
-{#        </a>#}
+        <a href="{% url 'accountapp:detail' pk=user.pk %}" class="nav-link">
+            <span>MyPage</span>
+        </a>
+        <form action="{% url 'accountapp:logout' %}?next={{ request.path }}" method="post">
+            {% csrf_token %}
+            <button type="submit" class="logout-btn">Logout</button>
+        </form>
         {% endif %}
     </div>
 </div>
