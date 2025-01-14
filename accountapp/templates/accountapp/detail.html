@@ -8,27 +8,33 @@
             <img src="{{ target_user.profile.image.url }}" alt="profile img" style="height: 12rem; width: 12rem; border-radius:20rem; margin-bottom:2rem;">
             <h2>
                 {{ target_user.profile.nickname }}
-                <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
-                    <p>
-                        edit
-                    </p>
-                </a>
+                    {% if target_user == user %}
+                        <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
+                            <p>
+                                edit
+                            </p>
+                        </a>
+                    {% endif %}
             </h2>
             <h5 style="margin-bottom:3rem;">
                 {{ target_user.profile.message }}
             </h5>
             {% else %}
-            <a href="{% url 'profileapp:create' %}">
-                <h2>
-                    Create Profile
-                </h2>
-            </a>
+                {% if target_user == user %}
+                    <a href="{% url 'profileapp:create' %}">
+                        <h2>
+                            Create Profile
+                        </h2>
+                    </a>
+                {% else %}
+                    <h2>This User Does Not Have a Profile</h2>
+                {% endif %}
             {% endif %}
 
             {% if target_user == user %}
             <a href="{% url 'accountapp:update' pk=user.pk %}">
                 <p>
-                    Change Info
+                    Change Account Info
                 </p>
             </a>
             <a href="{% url 'accountapp:delete' pk=user.pk %}">
