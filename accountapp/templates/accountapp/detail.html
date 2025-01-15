@@ -5,44 +5,47 @@
     <div>
         <div style="text-align:center; max-width: 500px; margin:4rem auto;">
             {% if target_user.profile %}
-            <img src="{{ target_user.profile.image.url }}" alt="profile img" style="height: 12rem; width: 12rem; border-radius:20rem; margin-bottom:2rem; object-fit:cover;">
-            <h2>
-                {{ target_user.profile.nickname }}
+                <img
+                    src="{{ target_user.profile.image.url }}"
+                    alt="profile img"
+                    style="height: 12rem; width: 12rem; border-radius: 50%; margin-bottom: 1.5rem; object-fit: cover; border: 2px solid #ddd;">
+                <h2 style="font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">
+                    {{ target_user.profile.nickname }}
                     {% if target_user == user %}
-                        <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}">
-                            <p>
-                                edit
-                            </p>
+                        <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}" style="color:black; font-size:1rem; text-decoration: none; margin-left: 10px;">
+                            edit
                         </a>
                     {% endif %}
-            </h2>
-            <h5 style="margin-bottom:3rem;">
-                {{ target_user.profile.message }}
-            </h5>
+                </h2>
+                <h5 style="margin-bottom: 3rem; margin-top: 2rem;font-size: 1rem;">
+                    {{ target_user.profile.message }}
+                </h5>
             {% else %}
                 {% if target_user == user %}
-                    <a href="{% url 'profileapp:create' %}">
-                        <h2>
-                            Create Profile
-                        </h2>
+                    <a href="{% url 'profileapp:create' %}" style="text-decoration: none; font-size: 1.5rem;">
+                        Create Profile
                     </a>
                 {% else %}
-                    <h2>This User Does Not Have a Profile</h2>
+                    <h2 style="font-size: 1.5rem;">This User Does Not Have a Profile</h2>
                 {% endif %}
             {% endif %}
 
             {% if target_user == user %}
-            <a href="{% url 'accountapp:update' pk=user.pk %}">
-                <p>
-                    Change Account Info
-                </p>
-            </a>
-            <a href="{% url 'accountapp:delete' pk=user.pk %}">
-                <p>
-                    Quit
-                </p>
-            </a>
+                <div style="margin-top: 2rem; display:flex; justify-content: center; gap:2rem; margin-bottom: 4rem;">
+                    <a href="{% url 'accountapp:update' pk=user.pk %}" class="btn btn-dark rounded-pill px-3 py-2" >
+                        Edit Account Info
+                    </a>
+                    <a href="{% url 'accountapp:delete' pk=user.pk %}"  class="btn btn-danger rounded-pill px-3 py-2" >
+                        Delete Account
+                    </a>
+                </div>
             {% endif %}
+
+            <div style="text-align: center;">
+                <div style="display:block; ">
+                    {% include 'snippets/list_fragment.html' with article_list=object_list %}
+                </div>
+            </div>
         </div>
     </div>
 
