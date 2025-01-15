@@ -12,7 +12,8 @@
                 <h2 style="font-size: 1.8rem; font-weight: bold; margin-bottom: 1rem;">
                     {{ target_user.profile.nickname }}
                     {% if target_user == user %}
-                        <a href="{% url 'profileapp:update' pk=target_user.profile.pk %}" style="color:black; font-size:1rem; text-decoration: none; margin-left: 10px;">
+                        <a class="material-icons"
+                           style="color:black; font-size:1rem; text-decoration: none;box-shadow: 0 0 4px #ccc; border-radius:10rem; padding: .4rem;" href="{% url 'profileapp:update' pk=target_user.profile.pk %}" >
                             edit
                         </a>
                     {% endif %}
@@ -32,11 +33,11 @@
 
             {% if target_user == user %}
                 <div style="margin-top: 2rem; display:flex; justify-content: center; gap:2rem; margin-bottom: 4rem;">
-                    <a href="{% url 'accountapp:update' pk=user.pk %}" class="btn btn-dark rounded-pill px-3 py-2" >
-                        Edit Account Info
+                    <a style="color:black; text-decoration: none;box-shadow: 0 0 4px #ccc; border-radius:10rem;" class="material-icons" href="{% url 'accountapp:update' pk=user.pk %}" >
+                        settings
                     </a>
-                    <a href="{% url 'accountapp:delete' pk=user.pk %}"  class="btn btn-danger rounded-pill px-3 py-2" >
-                        Delete Account
+                    <a style="color:black; text-decoration: none;box-shadow: 0 0 4px #ccc; border-radius:10rem;" class="material-icons" href="{% url 'accountapp:delete' pk=user.pk %}" >
+                        cancel
                     </a>
                 </div>
             {% endif %}
