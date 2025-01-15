@@ -6,6 +6,8 @@
 
 
 .title {
+    margin-bottom: 2rem;
+    margin-top:3rem;
     font-family: 'Major Mono Display', serif;
 }
 
@@ -20,7 +22,7 @@
 
 .header {
     text-align:center;
-    margin-top: 2rem;
+    margin: 2rem 0;
 }
 
 .nav-container {
@@ -48,7 +50,6 @@
     font-size: 1rem;
     border-radius: 5px;
 }
-
 
 
 @media screen and (max-width:500px){
