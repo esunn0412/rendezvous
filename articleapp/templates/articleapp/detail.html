@@ -15,9 +15,9 @@
                     src="{{ target_article.image.url }}" alt="article image">
 
             {% if target_article.content %}
-            <p style="margin-bottom:2rem;">
-                {{ target_article.content }}
-            </p>
+            <div class="text-start">
+                {{ target_article.content | safe }}
+            </div>
             {% endif %}
 
             {% if target_article.writer == user %}
