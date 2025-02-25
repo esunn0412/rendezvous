@@ -2,7 +2,7 @@ FROM python:3.11
 
 WORKDIR /home/
 
-RUN echo "testingggg"
+RUN echo "testinggg"
 
 RUN git clone https://github.com/esunn0412/rendezvous.git
 
@@ -18,4 +18,4 @@ RUN pip install -r requirements.txt
 
 EXPOSE 8000
 
-CMD ["bash", "-c", "python manage.py collectstatic --noinput --settings=myPinterest.settings.deploy && python manage.py migrate --settings=myPinterest.settings.deploy && gunicorn myPinterest.wsgi --env DJANGO_SETTINGS_MODULE=myPinterest.settings.deploy --bind 0.0.0.0:8080"]
+CMD ["bash", "-c", "python manage.py collectstatic --noinput --settings=myPinterest.settings.deploy && python manage.py migrate --settings=myPinterest.settings.deploy && gunicorn myPinterest.wsgi --env DJANGO_SETTINGS_MODULE=myPinterest.settings.deploy --bind 0.0.0.0:8000"]
