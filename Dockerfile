@@ -2,7 +2,7 @@ FROM python:3.11
 
 WORKDIR /home/
 
-RUN echo "testinggg"
+RUN echo "testingg"
 
 RUN git clone https://github.com/esunn0412/rendezvous.git
 

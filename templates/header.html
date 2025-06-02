@@ -1,32 +1,38 @@
 <div class="header">
-    <div>
-        <h1 class="title">rendezvous</h1>
-    </div>
-    <div class="nav-container">
-        <a href="{% url 'articleapp:list' %}" class="nav-link">
-            <span>Articles</span>
-        </a>
-        <a href="{% url 'projectapp:list' %}" class="nav-link">
-            <span>Projects</span>
-        </a>
-        <a href="{% url 'subscribeapp:list' %}" class="nav-link">
-            <span>Subscriptions</span>
-        </a>
-        {% if not user.is_authenticated %}
-        <a href="{% url 'accountapp:login' %}?next={{ request.path }}" class="nav-link">
-            <span>Login</span>
-        </a>
-        <a href="{% url 'accountapp:create' %}" class="nav-link">
-            <span>Signup</span>
-        </a>
-        {% else %}
-        <a href="{% url 'accountapp:detail' pk=user.pk %}" class="nav-link">
-            <span>MyPage</span>
-        </a>
-        <form action="{% url 'accountapp:logout' %}?next={{ request.path }}" method="post">
-            {% csrf_token %}
-            <button type="submit" class="logout-btn">Logout</button>
-        </form>
-        {% endif %}
-    </div>
+  <div>
+    <h1 class="title">rendezvous</h1>
+  </div>
+  <div class="nav-container">
+    <a href="{% url 'articleapp:list' %}" class="nav-link">
+      <span>Articles</span>
+    </a>
+    <a href="{% url 'projectapp:list' %}" class="nav-link">
+      <span>Projects</span>
+    </a>
+    <a href="{% url 'subscribeapp:list' %}" class="nav-link">
+      <span>Subscriptions</span>
+    </a>
+    {% if not user.is_authenticated %}
+    <a
+      href="{% url 'accountapp:login' %}?next={{ request.path }}"
+      class="nav-link"
+    >
+      <span>Login</span>
+    </a>
+    <a href="{% url 'accountapp:create' %}" class="nav-link">
+      <span>Signup</span>
+    </a>
+    {% else %}
+    <a href="{% url 'accountapp:detail' pk=user.pk %}" class="nav-link">
+      <span>MyPage</span>
+    </a>
+    <form
+      action="{% url 'accountapp:logout' %}?next={{ request.path }}"
+      method="post"
+    >
+      {% csrf_token %}
+      <button type="submit" class="logout-btn">Logout</button>
+    </form>
+    {% endif %}
+  </div>
 </div>

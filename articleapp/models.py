@@ -9,8 +9,8 @@ class Article(models.Model):
     writer = models.ForeignKey(User, on_delete=models.SET_NULL, related_name='article', null=True)
     project = models.ForeignKey(Project, on_delete=models.SET_NULL, related_name='article', null=True)
 
-    # user 에서 접근하는 이름 user.article
-    # on delete, the articles will become null, not entirely gone
+    # user calls it user.article
+    # on delete, the articles will become null
     title = models.CharField(max_length=200, null=True)
     image = models.ImageField(upload_to = 'articles/', null=False)
     content = models.TextField(null=True)
