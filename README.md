@@ -51,20 +51,20 @@ The application follows Django's modular app architecture:
 
 ## Production Deployment
 <img width="881" height="706" alt="service-comm" src="https://github.com/user-attachments/assets/ecfb82ce-2a42-4616-b94f-47d57c61a5ab" />
-This application is containerized using a Docker build process handling dependency installation, code deployment, and service configuration. 
+This application is containerized using Docker Compose with Nginx, Gunicorn, and MariaDB.
 
-Database Configuration 
+**Database Configuration**
 - DB: MariaDB
 - Port: 3306
 
-Application Server Configuration 
+**Application Server Configuration**
 - Server: gunicorn
 - WSGI Module: myPinterest.wsgi
 - Settings Module: myPinterest.settings.deploy
 - Bind Address: 0.0.0.0:8000
 - Port Exposure: Container port 8000
 
-Container Startup Sequence 
+**Container Startup Sequence**
 1. Static file collection
    - `python manage.py collectstatic --noinput --settings=myPinterest.settings.deploy`
 3. Database migration
