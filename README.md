@@ -49,28 +49,42 @@ The application follows Django's modular app architecture:
 4. **Static Files**: Collect static files for production deployment
 5. **Run Server**: Use `python manage.py runserver` for development
 
-## Production Deployment
-<img width="881" height="706" alt="service-comm" src="https://github.com/user-attachments/assets/ecfb82ce-2a42-4616-b94f-47d57c61a5ab" />
-This application is containerized using Docker Compose with Nginx, Gunicorn, and MariaDB.
+## Rendezvous AWS EC2 Deployment
+Django social platform deployed on AWS EC2 using Docker Compose with automated builds from GitHub.
 
-**Database Configuration**
-- DB: MariaDB
-- Port: 3306
+### Architecture
+- **Nginx**: Serves static/media files, proxies to Django on port 80
+- **Django + Gunicorn**: Auto-built from GitHub repo esunn0412/rendezvous
+- **MariaDB**: Database with persistent storage on port 3306
 
-**Application Server Configuration**
-- Server: gunicorn
-- WSGI Module: myPinterest.wsgi
-- Settings Module: myPinterest.settings.deploy
-- Bind Address: 0.0.0.0:8000
-- Port Exposure: Container port 8000
+### Process
+Create Docker secrets on the EC2 instance:
+```
+echo "your-django-secret-key" | docker secret create DJANGO_SECRET_KEY -  
+echo "mysql-password" | docker secret create MYSQL_PASSWORD -  
+echo "root-password" | docker secret create MYSQL_ROOT_PASSWORD -
+```
+Deployment
+```
+# Build Django image  
+docker build -t django_test_image:5 .  
+  
+# Deploy stack  
+docker-compose up -d  
+  
+# Check status  
+docker-compose ps
+```
+### Configuration Details
+The Dockerfile automatically:
+- Clones the latest code from GitHub
+- Installs dependencies including gunicorn and mysqlclient
+- Runs collectstatic and migrate with production settings
+- Starts Gunicorn on port 8000
 
-**Container Startup Sequence**
-1. Static file collection
-   - `python manage.py collectstatic --noinput --settings=myPinterest.settings.deploy`
-3. Database migration
-  - `python manage.py migrate --settings=myPinterest.settings.deploy`
-5. WSGI server launch
-  - `gunicorn myPinterest.wsgi --env DJANGO_SETTINGS_MODULE=myPinterest.settings.deploy --bind 0.0.0.0:8000`
+The production settings read Docker secrets and connect to MariaDB using the service name mariadb.
+
+Nginx serves static files from /data/static/ and media from /data/media/ with proper MIME types.
 
 
 ## Request-flow
