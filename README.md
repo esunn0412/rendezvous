@@ -30,6 +30,7 @@ Rendezvous is a web application built with Django that allows users to create an
 - **Rich Text Editing**: Medium Editor integration 
 
 ## Project Structure
+<img width="739" height="593" alt="system" src="https://github.com/user-attachments/assets/5297d4ce-5d90-427f-984e-8f9b1da7d32c" />
 
 The application follows Django's modular app architecture:
 
@@ -48,11 +49,31 @@ The application follows Django's modular app architecture:
 4. **Static Files**: Collect static files for production deployment
 5. **Run Server**: Use `python manage.py runserver` for development
 
-## Template System
+## Production Deployment
+<img width="881" height="706" alt="service-comm" src="https://github.com/user-attachments/assets/ecfb82ce-2a42-4616-b94f-47d57c61a5ab" />
+This application is containerized using a Docker build process handling dependency installation, code deployment, and service configuration. 
 
-The application uses Django's template inheritance with a hierarchical structure: 
+Database Configuration 
+- DB: MariaDB
+- Port: 3306
 
-- `base.html` - Main layout template
-- `head.html` - CSS/JS imports and meta tags
-- `header.html` - Navigation and authentication UI
-- `footer.html` - Site footer and branding
+Application Server Configuration 
+- Server: gunicorn
+- WSGI Module: myPinterest.wsgi
+- Settings Module: myPinterest.settings.deploy
+- Bind Address: 0.0.0.0:8000
+- Port Exposure: Container port 8000
+
+Container Startup Sequence 
+1. Static file collection
+   - `python manage.py collectstatic --noinput --settings=myPinterest.settings.deploy`
+3. Database migration
+  - `python manage.py migrate --settings=myPinterest.settings.deploy`
+5. WSGI server launch
+  - `gunicorn myPinterest.wsgi --env DJANGO_SETTINGS_MODULE=myPinterest.settings.deploy --bind 0.0.0.0:8000`
+
+
+## Request-flow
+<img width="798" height="604" alt="request-flow" src="https://github.com/user-attachments/assets/dcee5ca4-13d7-44f5-9b63-f5e477cb6704" />
+
+
