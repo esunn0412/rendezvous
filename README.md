@@ -82,10 +82,10 @@ The Dockerfile automatically:
 - Runs collectstatic and migrate with production settings
 - Starts Gunicorn on port 8000
 
-The production settings read Docker secrets and connect to MariaDB using the service name mariadb.
-
-Nginx serves static files from /data/static/ and media from /data/media/ with proper MIME types.
-
+### Note 
+- The production settings read Docker secrets and connect to MariaDB using the service name mariadb.
+- Nginx serves static files from /data/static/ and media from /data/media/ with proper MIME types.
+- Django uses the MySQL database backend to connect to MariaDB. MariaDB is a MySQL-compatible database, so Django treats it as MySQL from a driver perspective.
 
 ## Request-flow
 <img width="798" height="604" alt="request-flow" src="https://github.com/user-attachments/assets/dcee5ca4-13d7-44f5-9b63-f5e477cb6704" />
